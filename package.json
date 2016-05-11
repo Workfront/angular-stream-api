@@ -1,0 +1,29 @@
+{
+  "name": "angular-stream-api",
+  "version": "0.0.1",
+  "description": "A Workfront Stream API for AngularJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HamletHakobyan/angular-stream-api.git"
+  },
+  "keywords": [
+    "workfront",
+    "streamapi",
+    "stream",
+    "api",
+    "angular"
+  ],
+  "author": "Workfront",
+  "contributors": [
+    "Hamlet Hakobyan <hamlet.h.hakobyan@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HamletHakobyan/angular-stream-api/issues"
+  },
+  "homepage": "https://github.com/HamletHakobyan/angular-stream-api#readme"
+}
