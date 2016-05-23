@@ -1,0 +1,28 @@
+{
+  "name": "angular-stream-api",
+  "description": "A Workfront Stream API for AngularJS",
+  "main": "app.js",
+  "authors": [
+    "Hamlet Hakobyan <hamlet.h.hakobyan@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "workfront",
+    "streamapi",
+    "stream",
+    "api",
+    "angular"
+  ],
+  "homepage": "https://github.com/HamletHakobyan/angular-stream-api",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.5",
+    "angular-mocks": "^1.5.5"
+  }
+}

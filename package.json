@@ -2,9 +2,14 @@
   "name": "angular-stream-api",
   "version": "0.0.1",
   "description": "A Workfront Stream API for AngularJS",
+  "license": "MIT",
+  "author": "Workfront",
+  "contributors": [
+    "Hamlet Hakobyan <hamlet.h.hakobyan@gmail.com>"
+  ],
   "main": "app.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start ./src/spec/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -17,13 +22,19 @@
     "api",
     "angular"
   ],
-  "author": "Workfront",
-  "contributors": [
-    "Hamlet Hakobyan <hamlet.h.hakobyan@gmail.com>"
-  ],
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/HamletHakobyan/angular-stream-api/issues"
   },
-  "homepage": "https://github.com/HamletHakobyan/angular-stream-api#readme"
+  "homepage": "https://github.com/HamletHakobyan/angular-stream-api#readme",
+  "devDependencies": {
+    "eslint": "^2.10.2",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "url-parse": "^1.1.1",
+    "webpack": "^1.13.1"
+  }
 }

@@ -1,0 +1,40 @@
+{
+    "env": {
+        "commonjs": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": [
+            1,
+            4
+        ],
+        "no-extra-semi": [
+            1
+        ],
+        "linebreak-style": [
+            1,
+            "windows"
+        ],
+        "quotes": [
+            1,
+            "single"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-unused-vars": [
+            1
+        ],
+        "strict": [
+            2
+        ],
+        "eol-last": [
+            1
+        ],
+        "semi-spacing": [
+            1,
+            { "before": false, "after": true }
+        ]
+    }
+}
