@@ -13,6 +13,9 @@ function streamApiServiceFactory($http, $q) {
         factory = {},
         _instance;
         
+    Api.prototype.http = $http;
+    Api.prototype.promise = $q;
+    
     factory.getInstance = function(config, returnNewInstance) {
         if(returnNewInstance) {
             return new Api(config);

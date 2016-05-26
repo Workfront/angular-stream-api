@@ -55,25 +55,39 @@ describe('Api', function() {
     
     it('should set it\'s config.url correctly when passed correct url and not passed version', function() {
         var api = streamApiService.getInstance({url: 'https://foo'});
-        expect(api.config.url)
+        expect(api.baseUrl)
             .toBe('https://foo/attask/api');
     });
     
     it('should set it\'s config.url  when passed valid url and version unsupported', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: 'unsupported'});
-        expect(api.config.url)
+        expect(api.baseUrl)
             .toBe('https://foo/attask/api-unsupported');
     });
     
     it('should set it\'s config.url  when passed valid url and version internal', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: 'internal'});
-        expect(api.config.url)
+        expect(api.baseUrl)
             .toBe('https://foo/attask/api-internal');
     });
     
     it('should set it\'s config.url  when passed valid url and version number', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: '5.0'});
-        expect(api.config.url)
+        expect(api.baseUrl)
             .toBe('https://foo/attask/api/v5.0');
     });
+    
+    it('should return the same object on each getInstance regardless of passed config and version', function() {
+        var api1 = streamApiService.getInstance({url: 'https://foo', version: '5.0'});
+        var api2 = streamApiService.getInstance({url: 'https://bar', version: '4.0'});
+        expect(api1).toBe(api2);
+    });
+    
+    it('should return new Api object when requested new', function() {
+        var api1 = streamApiService.getInstance({url: 'https://foo', version: '5.0'});
+        var api2 = streamApiService.getInstance({url: 'https://bar', version: '4.0'}, true);
+        expect(api1).not.toBe(api2);
+    });
+    
+    
 });

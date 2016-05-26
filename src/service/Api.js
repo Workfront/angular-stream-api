@@ -30,12 +30,15 @@ function Api(config) {
         }
     }
 
-    this.config = {
-        url: parsedUrl.protocol + '//' + parsedUrl.host + path
-    };
-    
-    this.Constants = require('./ApiConstants');
-    this.Methods = require('./ApiMethods');
+    this.baseUrl = parsedUrl.protocol + '//' + parsedUrl.host + path;
 }
+
+Api.prototype.Constants = require('./ApiConstants');
+Api.prototype.Methods = require('./ApiMethods');
+
+require('./request')(Api);
+require('./get')(Api);
+require('./copy')(Api);
+require('./count')(Api);
 
 module.exports = Api;
