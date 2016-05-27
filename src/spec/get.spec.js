@@ -25,7 +25,7 @@ describe('get', function() {
     });
 
     it('should make call by correct url with array of object IDs', function() {
-        var requestedUrl = 'https://foo/attask/api/task?ID=12345678&ID=23456789&fields=*,projectID';
+        var requestedUrl = 'https://foo/attask/api-internal/task?ID=12345678&ID=23456789&fields=*,projectID';
         $httpBackend.expect('GET', requestedUrl)
         .respond(200);
         
@@ -35,7 +35,7 @@ describe('get', function() {
     });
 
     it('should make call by correct url with single element in IDs array', function() {
-        var requestedUrl = 'https://foo/attask/api/task?ID=12345678&fields=*,projectID';
+        var requestedUrl = 'https://foo/attask/api-internal/task?ID=12345678&fields=*,projectID';
         $httpBackend.expect('GET', requestedUrl)
         .respond(200);
         
@@ -45,7 +45,7 @@ describe('get', function() {
     });
 
     it('should make call by correct url with string ID', function() {
-        var requestedUrl = 'https://foo/attask/api/task?ID=12345678&fields=*,projectID';
+        var requestedUrl = 'https://foo/attask/api-internal/task?ID=12345678&fields=*,projectID';
         $httpBackend.expect('GET', requestedUrl)
         .respond(200);
         

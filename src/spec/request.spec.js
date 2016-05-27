@@ -29,13 +29,13 @@ describe('request', function() {
 
     it('should setup config correctly when passed task as path and method', function() {
         StreamApi.request('task', null, null, null, StreamApi.Methods.GET);
-        expect(StreamApi.config.url).toBe('http://foo/attask/api/task');
+        expect(StreamApi.config.url).toBe('http://foo/attask/api-internal/task');
         expect(StreamApi.config.method).toBe(StreamApi.Methods.GET);
     });
 
     it('should set correct url when passed /task as path', function() {
         StreamApi.request('task', null, null, null, StreamApi.Methods.GET);
-        expect(StreamApi.config.url).toBe('http://foo/attask/api/task');
+        expect(StreamApi.config.url).toBe('http://foo/attask/api-internal/task');
     });
 
     it('should throw when not passed data on method POST', function() {

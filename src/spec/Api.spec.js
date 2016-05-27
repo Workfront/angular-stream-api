@@ -55,25 +55,25 @@ describe('Api', function() {
     
     it('should set it\'s config.url correctly when passed correct url and not passed version', function() {
         var api = streamApiService.getInstance({url: 'https://foo'});
-        expect(api.baseUrl)
-            .toBe('https://foo/attask/api');
+        expect(api.options.url)
+            .toBe('https://foo/attask/api-internal');
     });
     
     it('should set it\'s config.url  when passed valid url and version unsupported', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: 'unsupported'});
-        expect(api.baseUrl)
+        expect(api.options.url)
             .toBe('https://foo/attask/api-unsupported');
     });
     
     it('should set it\'s config.url  when passed valid url and version internal', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: 'internal'});
-        expect(api.baseUrl)
+        expect(api.options.url)
             .toBe('https://foo/attask/api-internal');
     });
     
     it('should set it\'s config.url  when passed valid url and version number', function() {
         var api = streamApiService.getInstance({url: 'https://foo', version: '5.0'});
-        expect(api.baseUrl)
+        expect(api.options.url)
             .toBe('https://foo/attask/api/v5.0');
     });
     

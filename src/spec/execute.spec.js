@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-describe('copy', function() {
+describe('execute', function() {
     beforeEach(function() {
         var ngModule = angular.module('mockModule', []);
         require('./../ApiServiceProvider')(ngModule);
@@ -24,17 +24,12 @@ describe('copy', function() {
         streamApi = streamApiService.getInstance({url: 'https://foo'});
     });
 
-    it('should make call to correct url with correct data and headers', function() {
-        var requestedUrl = 'https://foo/attask/api-internal/task?copySourceID=12345678&fields=*';
-        var headerData = function(headers) {
-            return headers['Content-Type'] === 'application/json;charset=utf-8';
-        };
+    // it('should make call to correct url', function() {
+    //     var requestedUrl = 'https://foo/attask/api-internal/task';
+    //     $httpBackend.expectPOST(requestedUrl)
+    //     .respond(200);
+    //     streamApi.create('task', {});
         
-        $httpBackend.expectPOST(requestedUrl, {name:'copied task'}, headerData)
-        .respond(200);
-        
-        streamApi.copy('task', '12345678', {name:'copied task'}, '*');
-        
-        $httpBackend.flush();
-    });
+    //     $httpBackend.flush();
+    // });
 });

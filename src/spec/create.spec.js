@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-describe('copy', function() {
+describe('create', function() {
     beforeEach(function() {
         var ngModule = angular.module('mockModule', []);
         require('./../ApiServiceProvider')(ngModule);
@@ -24,16 +24,36 @@ describe('copy', function() {
         streamApi = streamApiService.getInstance({url: 'https://foo'});
     });
 
-    it('should make call to correct url with correct data and headers', function() {
-        var requestedUrl = 'https://foo/attask/api-internal/task?copySourceID=12345678&fields=*';
+    it('should make call to correct url', function() {
+        var requestedUrl = 'https://foo/attask/api-internal/task';
+        $httpBackend.expectPOST(requestedUrl)
+        .respond(200);
+        streamApi.create('task', {});
+        
+        $httpBackend.flush();
+    });
+
+    it('should have correct data in request', function() {
+        var data = {
+            name: 'some task name',
+            projectID: '12345678'
+        };
+        
+        $httpBackend.expectPOST(/.*/, data)
+        .respond(200);
+        streamApi.create('task', data);
+        
+        $httpBackend.flush();
+    });
+
+    it('should set correct headers', function() {
         var headerData = function(headers) {
             return headers['Content-Type'] === 'application/json;charset=utf-8';
         };
         
-        $httpBackend.expectPOST(requestedUrl, {name:'copied task'}, headerData)
+        $httpBackend.expectPOST(/.*/, /.*/, headerData)
         .respond(200);
-        
-        streamApi.copy('task', '12345678', {name:'copied task'}, '*');
+        streamApi.create('task', {});
         
         $httpBackend.flush();
     });

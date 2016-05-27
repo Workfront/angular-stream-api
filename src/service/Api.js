@@ -20,6 +20,7 @@ function Api(config) {
     var parsedUrl = new Url(config.url);
 
     var path;
+    config.version = config.version || 'internal';
     if (config.version === 'internal' || config.version === 'unsupported') {
         path = '/attask/api-' + config.version;
     }
@@ -30,7 +31,8 @@ function Api(config) {
         }
     }
 
-    this.baseUrl = parsedUrl.protocol + '//' + parsedUrl.host + path;
+    this.options = {};
+    this.options.url = parsedUrl.protocol + '//' + parsedUrl.host + path;
 }
 
 Api.prototype.Constants = require('./ApiConstants');
@@ -40,5 +42,10 @@ require('./request')(Api);
 require('./get')(Api);
 require('./copy')(Api);
 require('./count')(Api);
+require('./create')(Api);
+require('./edit')(Api);
+require('./login')(Api);
+require('./logout')(Api);
+require('./execute')(Api);
 
 module.exports = Api;
