@@ -3,15 +3,14 @@ language: node_js
 sudo: false
 
 notifications:
-  email:
-    on_failure: always
-    on_success: change
+    email:
+        on_failure: always
+        on_success: change
 
 node_js:
-  - "5"
-  - "5.1"
-  - "iojs"
-  
+    - "5"
+    - "5.1"
+    - "iojs"
+
 before_script:
-  - npm install -g bower
-  - bower install
+    - npm install -g bower
