@@ -16,4 +16,4 @@ before_install:
     - npm install -g bower
     
 script:
-    - node_modules/.bin/karma start ./src/spec/karma.conf.js
+    - node_modules/.bin/karma start ./src/spec/karma.conf.ci.js
