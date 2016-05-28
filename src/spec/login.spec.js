@@ -26,14 +26,28 @@ describe('login', function() {
 
     it('should make call to correct url', function() {
         var requestedUrl = /https:\/\/foo\/attask\/api-internal\/login/;
-        var headersData = function(headers) {
-            return true;
-        };
-        
-        $httpBackend.expectPOST(requestedUrl, /.*/, headersData, [])
+
+        $httpBackend.expectPOST(requestedUrl)
         .respond(200);
         streamApi.login('username', 'password');
         
         $httpBackend.flush();
+    });
+
+    it('should store session ID after successful login', function() {
+        var requestedUrl = /https:\/\/foo\/attask\/api-internal\/login/;
+        var response = {
+            data: {
+                sessionID: '12345678'
+            }
+        };
+
+        $httpBackend.expectPOST(requestedUrl, /.*/)
+        .respond(200, response);
+        streamApi.login('username', 'password');
+        
+        $httpBackend.flush();
+        
+        expect(streamApi.options.headers.sessionID).toBe('12345678');
     });
 });

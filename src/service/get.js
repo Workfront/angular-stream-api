@@ -13,6 +13,6 @@ module.exports = function(Api) {
             };
         }
 
-        return this.request(objCode, null, params, fields, this.Methods.GET);
+        return this.request(objCode, undefined, params, fields, this.Methods.GET);
     };
 };

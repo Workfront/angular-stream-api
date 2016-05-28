@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Login example</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+
+	<!-- The script below is not needed if your browser supports ES6 promises -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="../dist/angular-stream-api.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-app="testApp">
+	<div class="container">
+		<div ng-controller="testController as vm">
+			<div class="form-group">
+				<label for="url">Url</label>
+				<input type="text" class="form-control" id="url" ng-model="vm.host" placeholder="Url to use for connection to Workfront">
+			</div>
+
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input type="text" class="form-control" id="username" ng-model="vm.username" placeholder="Your Workfront login">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="text" class="form-control" id="password" ng-model="vm.password" placeholder="Your Workfront password">
+			</div>
+			<div class="form-group">
+				<label for="login-data">Login Data</label>
+				<textarea id="login-data">{{vm.loginData | json}}</textarea>
+			</div>
+
+			<button type="submit" class="btn btn-default" ng-click="vm.doLogin()">Login</button>
+		</div>
+	</div>
+</body>
+</html>

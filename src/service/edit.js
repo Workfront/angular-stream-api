@@ -4,16 +4,19 @@ var angular = require('angular');
 
 module.exports = function(Api) {
     Api.prototype.edit = function(objCode, objID, data, fields) {
-        if(!data) {
-            throw new Error('You should pass edit data as \'data\' argument');
+        if(!objCode || typeof objCode !== 'string') {
+            throw new Error('You must provide objCode of type string');
         }
-        if(angular.isObject(objID) && ('ID' in objID)) {
-            angular.extend(data, objID);
-        } else if(typeof objID === 'string') {
-            data.ID = objID;
+        if(!data || !angular.isObject(data)) {
+            throw new Error('You must provide edit data object as \'data\' argument');
+        }
+        if(!objID || typeof objID !== 'string') {
+            if(!('ID' in data)) {
+                throw new Error('You must provide either \'ojbID\' of type string or \'data\' with property ID');
+            }
         } else {
-            throw new Error('You should pass \'objID\' as a string or object with property \'ID\'');
+            data.ID = objID;
         }
-        return this.request(objCode, data, null, fields, this.Methods.PUT);
+        return this.request(objCode, data, undefined, fields, this.Methods.PUT);
     };
 };

@@ -47,5 +47,10 @@ require('./edit')(Api);
 require('./login')(Api);
 require('./logout')(Api);
 require('./execute')(Api);
+require('./search')(Api);
+require('./metadata')(Api);
+require('./namedQuery')(Api);
+require('./report')(Api);
+require('./remove')(Api);
 
 module.exports = Api;

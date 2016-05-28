@@ -7,11 +7,11 @@ module.exports = function(Api) {
             password: password
         };
 
-        this.request('login', null, params, null, this.Methods.POST)
+        return this.request('login', undefined, params, undefined, this.Methods.POST)
         .then(function(response) {
             if(response.data && response.data.data) {
-                this.options.sessionID = response.data.data.sessionID;
-                return response.data.data;
+                this.options.headers = {sessionID: response.data.data.sessionID};
+                return response.data;
             }
 
             return this.promise.reject();

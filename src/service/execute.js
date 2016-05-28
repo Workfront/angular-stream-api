@@ -10,6 +10,6 @@ module.exports = function(Api) {
             actionArgs = actionArgs || {};
             actionArgs['action'] = action;
         }
-        return this.request(endPoint, actionArgs, null, this.Methods.PUT);
+        return this.request(endPoint, undefined, actionArgs, undefined, this.Methods.PUT);
     };
 };

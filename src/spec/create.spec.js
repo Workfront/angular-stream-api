@@ -23,6 +23,17 @@ describe('create', function() {
     beforeEach(function() {
         streamApi = streamApiService.getInstance({url: 'https://foo'});
     });
+    it('should throw an error when objCode is not provided', function() {
+        expect(function() {
+            streamApi.create(undefined, {});
+        }).toThrow(new Error('You must provide at least objCode and data'));
+    });
+    
+    it('should throw an error when data is not provided', function() {
+        expect(function() {
+            streamApi.create('task', undefined);
+        }).toThrow(new Error('You must provide at least objCode and data'));
+    });
 
     it('should make call to correct url', function() {
         var requestedUrl = 'https://foo/attask/api-internal/task';

@@ -23,11 +23,14 @@ describe('count', function() {
     beforeEach(function() {
         streamApi = streamApiService.getInstance({url: 'https://foo'});
     });
-
+    
+    it('should throw an exception when objCode doesn\'t orvided', function() {
+        expect(function() {streamApi.count();})
+        .toThrow(new Error('You must provide \'objCode\''));
+    });
 
     it('should make call to correct url', function() {
         var requestedUrl = 'https://foo/attask/api-internal/task/count?name=some+task+name&name_Mod=cicontains';
-        var data = {count: 1};
         $httpBackend.whenGET(requestedUrl)
         .respond(200);
         var query = {};
@@ -63,7 +66,7 @@ describe('count', function() {
             expect(count).toBe(data.count);
             done();
         });
-        
+
         $httpBackend.flush();
     });
 });

@@ -7,13 +7,14 @@ function streamApiServiceProvider() {
     this.$get = streamApiServiceFactory;
 }
 
-streamApiServiceFactory.$inject = ['$http', '$q'];
-function streamApiServiceFactory($http, $q) {
+streamApiServiceFactory.$inject = ['$http', '$httpParamSerializer', '$q'];
+function streamApiServiceFactory($http, $httpParamSerializer, $q) {
     var Api = require('./service/Api'),
         factory = {},
         _instance;
         
     Api.prototype.http = $http;
+    Api.prototype.serializer = $httpParamSerializer;
     Api.prototype.promise = $q;
     
     factory.getInstance = function(config, returnNewInstance) {

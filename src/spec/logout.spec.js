@@ -40,10 +40,11 @@ describe('logout', function() {
         };
         $httpBackend.expectGET(/.*/)
         .respond(200, data);
-        streamApi.options.sessionID = '12345678';
+        var sessionID = '12345678';
+        streamApi.options.headers = {sessionID: sessionID};
         streamApi.logout()
         .then(function() {
-            expect(streamApi.options.sessionID).toBeUndefined();
+            expect(streamApi.options.headers.sessionID).toBeUndefined();
             done();
         });
         
@@ -57,10 +58,10 @@ describe('logout', function() {
         $httpBackend.expectGET(/.*/)
         .respond(200, data);
         var sessionID = '12345678';
-        streamApi.options.sessionID = sessionID;
+        streamApi.options.headers = {sessionID: sessionID};
         streamApi.logout()
         .catch(function() {
-            expect(streamApi.options.sessionID).toBe(sessionID);
+            expect(streamApi.options.headers.sessionID).toBe(sessionID);
             done();
         });
         
@@ -68,13 +69,14 @@ describe('logout', function() {
     });
 
     it('should not do anything', function(done) {
+        
         $httpBackend.expectGET(/.*/)
         .respond(500);
         var sessionID = '12345678';
-        streamApi.options.sessionID = sessionID;
+        streamApi.options.headers = {sessionID: sessionID};
         streamApi.logout()
         .catch(function() {
-            expect(streamApi.options.sessionID).toBe(sessionID);
+            expect(streamApi.options.headers.sessionID).toBe(sessionID);
             done();
         });
         

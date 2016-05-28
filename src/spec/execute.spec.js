@@ -24,12 +24,21 @@ describe('execute', function() {
         streamApi = streamApiService.getInstance({url: 'https://foo'});
     });
 
-    // it('should make call to correct url', function() {
-    //     var requestedUrl = 'https://foo/attask/api-internal/task';
-    //     $httpBackend.expectPOST(requestedUrl)
-    //     .respond(200);
-    //     streamApi.create('task', {});
+    it('should make call to correct url when passed ID', function() {
+        var requestedUrl = 'https://foo/attask/api-internal/task/12345678/someAction';
+        $httpBackend.expectPUT(requestedUrl)
+        .respond(200);
+        streamApi.execute('task', '12345678', 'someAction', {});
         
-    //     $httpBackend.flush();
-    // });
+        $httpBackend.flush();
+    });
+
+    it('should make call to correct url when not passed ID', function() {
+        var requestUrl = 'https://foo/attask/api-internal/task?ID=12345678&action=someAction';
+        $httpBackend.expectPUT(requestUrl, undefined, undefined, ['action', 'ID'])
+        .respond(200);
+        streamApi.execute('task', null, 'someAction', {ID: '12345678'});
+        
+        $httpBackend.flush();
+    });
 });

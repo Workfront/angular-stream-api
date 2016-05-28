@@ -45,14 +45,13 @@ describe('edit', function() {
         $httpBackend.flush();
     });
 
-    it('should have correct data in request when passed objID as object', function() {
+    it('should have correct data in request when passed objID as string', function() {
         var data = {
                 name: 'some task name'
             },
-            objID = {
-                ID: '12345678'
-            };
-        $httpBackend.expectPUT(/.*/, angular.extend({}, data, objID))
+            objID = '12345678';
+        data.ID = objID;
+        $httpBackend.expectPUT(/.*/, data)
         .respond(200);
         streamApi.edit('task', objID, data);
         
@@ -66,7 +65,7 @@ describe('edit', function() {
         
         $httpBackend.expectPUT(/.*/, /.*/, headerData)
         .respond(200);
-        streamApi.edit('task', {ID: '12345678'}, {});
+        streamApi.edit('task', '12345678', {});
         
         $httpBackend.flush();
     });
@@ -74,7 +73,21 @@ describe('edit', function() {
     it('should throw when data doesn\'t passed', function() {
         expect(function() {
             streamApi.edit('task', {ID: '12345678'});
-        }).toThrow(new Error('You should pass edit data as \'data\' argument'));
+        }).toThrow(new Error('You must provide edit data object as \'data\' argument'));
+        
+    });
+
+    it('should throw when objID is not string', function() {
+        expect(function() {
+            streamApi.edit('task', 12345678, {});
+        }).toThrow(new Error('You must provide either \'ojbID\' of type string or \'data\' with property ID'));
+        
+    });
+
+    it('should throw when objID doesn\'t provided and data hasn\'t property ID', function() {
+        expect(function() {
+            streamApi.edit('task', undefined, {});
+        }).toThrow(new Error('You must provide either \'ojbID\' of type string or \'data\' with property ID'));
         
     });
 });

@@ -2,10 +2,10 @@
 
 module.exports = function(Api) {
     Api.prototype.logout = function() {
-        return this.request('logout', null, null, null, this.Methods.GET)
+        return this.request('logout', undefined, undefined, undefined, this.Methods.GET)
         .then(function(response) {
             if(response.data && response.data.success) {
-                delete this.options.sessionID;
+                delete this.options.headers.sessionID;
                 return this.promise.resolve();
             }
 
