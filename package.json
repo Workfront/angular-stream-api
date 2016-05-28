@@ -9,7 +9,6 @@
   ],
   "main": "app.js",
   "scripts": {
-    "postinstall": "bower install",
     "test": "karma start ./src/spec/karma.conf.js"
   },
   "repository": {
