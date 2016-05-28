@@ -9,7 +9,10 @@ module.exports = function(config) {
         specs = path.resolve(__dirname, '**', '*.spec.js'),
         angularPath = path.resolve('bower_components', 'angular', 'angular.js'),
         angularMockPath = path.resolve('bower_components', 'angular-mocks', 'angular-mocks.js'),
-        preprocessors = {};
+        preprocessors = {},
+        webpackConfig = require('../../webpack.config.js');
+        
+    webpackConfig.entry = {};
     preprocessors[specs] = ['webpack'];
 
     config.set({
@@ -39,11 +42,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: preprocessors,
         
-        webpack: {
-            externals: {
-                angular: true
-            }
-        },
+        webpack: webpackConfig,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

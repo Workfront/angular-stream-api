@@ -10,6 +10,7 @@
   "main": "app.js",
   "scripts": {
     "postinstall": "bower install",
+    "build": "webpack -p",
     "test": "karma start ./src/spec/karma.conf.js"
   },
   "repository": {
