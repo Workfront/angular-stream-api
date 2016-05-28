@@ -12,5 +12,5 @@ node_js:
     - "5.1"
     - "iojs"
 
-before_script:
+before_install:
     - npm install -g bower
