@@ -6,11 +6,11 @@
 
 module.exports = function(config) {
     var path = require('path'),
-        specs = path.resolve(__dirname, '**', '*.spec.js'),
+        specs = path.resolve(__dirname, 'spec',  '**', '*.spec.js'),
         angularPath = path.resolve('bower_components', 'angular', 'angular.js'),
         angularMockPath = path.resolve('bower_components', 'angular-mocks', 'angular-mocks.js'),
         preprocessors = {},
-        webpackConfig = require('../../webpack.config.js');
+        webpackConfig = require('./webpack.config');
         
     webpackConfig.entry = {};
     preprocessors[specs] = ['webpack'];

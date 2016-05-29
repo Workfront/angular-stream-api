@@ -3,14 +3,14 @@
 'use strict';
 
 var angular = require('angular');
-var Api = require('./../service/Api');
+var Api = require('./../src/service/Api');
 
 describe('Api', function() {
     
     beforeEach(function() {
         var ngModule = angular.module('mockModule', []);
 
-        require('./../ApiServiceProvider')(ngModule);
+        require('./../src/streamApiServiceProvider')(ngModule);
     });
     
     beforeEach(angular.mock.module('mockModule'));

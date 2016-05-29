@@ -7,7 +7,7 @@ var angular = require('angular');
 describe('logout', function() {
     beforeEach(function() {
         var ngModule = angular.module('mockModule', []);
-        require('./../ApiServiceProvider')(ngModule);
+        require('./../src/streamApiServiceProvider')(ngModule);
     });
 
     beforeEach(angular.mock.module('mockModule'));

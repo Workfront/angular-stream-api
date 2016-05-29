@@ -8,7 +8,7 @@ describe('request', function() {
     
     beforeEach(function() {
         var ngModule = angular.module('mockModule', []);
-        require('./../ApiServiceProvider')(ngModule);
+        require('./../src/streamApiServiceProvider')(ngModule);
     });
 
     beforeEach(function() {
