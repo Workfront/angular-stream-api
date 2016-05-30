@@ -6,13 +6,19 @@
 
 module.exports = function(config) {
     var path = require('path'),
-        specs = path.resolve(__dirname, 'spec',  '**', '*.spec.js'),
+        specs = path.join('./', 'spec',  '**', '*.spec.js'),
+        srcs = path.join('./', 'src',  '**', '*.spec.js'),
         angularPath = path.resolve('bower_components', 'angular', 'angular.js'),
         angularMockPath = path.resolve('bower_components', 'angular-mocks', 'angular-mocks.js'),
         preprocessors = {},
         webpackConfig = require('./webpack.config');
         
     webpackConfig.entry = {};
+    webpackConfig.module = webpackConfig.module || {};
+    webpackConfig.module.postLoaders = webpackConfig.module.postLoaders || [];
+    webpackConfig.module.postLoaders.push(
+        { test: /^(?!(.+\.(spec))).+\.js$/i, exclude: /node_modules/, loader: 'istanbul-instrumenter'}
+    );
     preprocessors[specs] = ['webpack'];
 
     config.set({
@@ -29,7 +35,8 @@ module.exports = function(config) {
         files: [
             angularPath,
             angularMockPath,
-            specs
+            specs,
+            srcs
         ],
 
 
@@ -37,6 +44,7 @@ module.exports = function(config) {
         exclude: [
         ],
 
+        
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -47,8 +55,16 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
 
+        coverageReporter: {
+            dir: 'dist/coverage/',
+            subdir: '.',
+            reporters: [
+                { type: 'lcov'},
+                { type: 'text-summary' } 
+            ]
+        },
 
     // web server port
         port: 9876,

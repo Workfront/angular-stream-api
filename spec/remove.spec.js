@@ -46,4 +46,34 @@ describe('remove', function() {
         expect(requestSpy).toHaveBeenCalledWith('task/12345678', undefined, params, undefined, streamApi.Methods.DELETE);
         $httpBackend.flush();
     });
+
+    it('should resolve promise on success', function(done) {
+        var requestedUrl = 'https://foo/attask/api-internal/task/12345678?force=true';
+        var result = {
+            success: true
+        };
+        $httpBackend.expectDELETE(requestedUrl)
+        .respond(200, result);
+        
+        streamApi.remove('task', '12345678', true)
+        .then(function() {
+            done();
+        });
+
+        $httpBackend.flush();
+    });
+
+    it('should reject promise on fail', function(done) {
+        var requestedUrl = 'https://foo/attask/api-internal/task/12345678?force=true';
+
+        $httpBackend.expectDELETE(requestedUrl)
+        .respond(401);
+        
+        streamApi.remove('task', '12345678', true)
+        .catch(function() {
+            done();
+        });
+
+        $httpBackend.flush();
+    });
 });

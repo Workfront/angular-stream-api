@@ -70,6 +70,20 @@ describe('edit', function() {
         $httpBackend.flush();
     });
 
+    it('should throw when objCode doesn\'t passed', function() {
+        expect(function() {
+            streamApi.edit(undefined, {ID: '12345678'});
+        }).toThrow(new Error('You must provide objCode of type string'));
+        
+    });
+
+    it('should throw when objCode is not string', function() {
+        expect(function() {
+            streamApi.edit(1, {ID: '12345678'});
+        }).toThrow(new Error('You must provide objCode of type string'));
+        
+    });
+
     it('should throw when data doesn\'t passed', function() {
         expect(function() {
             streamApi.edit('task', {ID: '12345678'});
