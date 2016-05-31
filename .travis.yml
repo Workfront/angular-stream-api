@@ -16,4 +16,4 @@ before_install:
     - npm install -g bower
     
 script:
-    - npm run test-ci && cat ./dist/overage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./dist/coverage
+    - npm run test-ci && cat ./dist/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./dist/coverage
