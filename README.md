@@ -1,4 +1,4 @@
-[![Build Status][travis-image]][travis-url]
+[![Build Status][travis-image]][travis-url] [![Coverage][coveralls-image]][coveralls-url]
 
 # angular-stream-api
 A Workfront Stream API for AngularJS
@@ -13,4 +13,7 @@ browse https://o365.attask-ondemand.com/index.html
 
 
 [travis-url]: https://travis-ci.org/HamletHakobyan/angular-stream-api
-[travis-image]: https://img.shields.io/travis/HamletHakobyan/angular-stream-api.svg?style=flat
+[travis-image]: https://img.shields.io/travis/HamletHakobyan/angular-stream-api.svg?style=flat-square
+
+[coveralls-url]: https://coveralls.io/r/HamletHakobyan/angular-stream-api
+[coveralls-image]: https://img.shields.io/coveralls/HamletHakobyan/angular-stream-api.svg?style=flat
