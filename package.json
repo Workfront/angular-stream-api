@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/HamletHakobyan/angular-stream-api#readme",
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "eslint": "^2.10.2",
     "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine": "^2.4.1",
