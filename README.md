@@ -16,4 +16,4 @@ browse https://o365.attask-ondemand.com/index.html
 [travis-image]: https://img.shields.io/travis/HamletHakobyan/angular-stream-api.svg?style=flat-square
 
 [coveralls-url]: https://coveralls.io/r/HamletHakobyan/angular-stream-api
-[coveralls-image]: https://img.shields.io/coveralls/HamletHakobyan/angular-stream-api.svg?style=flat
+[coveralls-image]: https://img.shields.io/coveralls/HamletHakobyan/angular-stream-api.svg?style=flat-square
