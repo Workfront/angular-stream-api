@@ -1,4 +1,4 @@
-[![Build Status][travis-image]][travis-url] [![Coverage][coveralls-image]][coveralls-url]
+[![Build Status][travis-image]][travis-url] [![Coverage][coveralls-image]][coveralls-url] [![|MITLicense][license-image]][license-url] 
 
 # angular-stream-api
 A Workfront Stream API for AngularJS
@@ -17,3 +17,6 @@ browse https://o365.attask-ondemand.com/index.html
 
 [coveralls-url]: https://coveralls.io/r/HamletHakobyan/angular-stream-api
 [coveralls-image]: https://img.shields.io/coveralls/HamletHakobyan/angular-stream-api.svg?style=flat-square
+
+[license-image]: http://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[license-url]: LICENSE
