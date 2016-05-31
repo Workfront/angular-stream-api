@@ -4,22 +4,18 @@
 // Generated on Mon May 23 2016 14:05:11 GMT+0400 (Caucasus Standard Time)
 'use strict';
 
+var coverage = process.env.NODE_MODE === 'cov',
+    ci = process.env.NODE_MODE === 'ci';
+
 module.exports = function(config) {
     var path = require('path'),
-        specs = path.join('./', 'spec',  '**', '*.spec.js'),
-        srcs = path.join('./', 'src',  '**', '*.spec.js'),
+        specs = path.resolve('spec', '**', '*.js'),
         angularPath = path.resolve('bower_components', 'angular', 'angular.js'),
         angularMockPath = path.resolve('bower_components', 'angular-mocks', 'angular-mocks.js'),
         preprocessors = {},
-        webpackConfig = require('./webpack.config');
-        
-    webpackConfig.entry = {};
-    webpackConfig.module = webpackConfig.module || {};
-    webpackConfig.module.postLoaders = webpackConfig.module.postLoaders || [];
-    webpackConfig.module.postLoaders.push(
-        { test: /^(?!(.+\.(spec))).+\.js$/i, exclude: /node_modules/, loader: 'istanbul-instrumenter'}
-    );
-    preprocessors[specs] = ['webpack'];
+        singleRun = ci;
+
+    preprocessors[specs] = 'webpack';
 
     config.set({
 
@@ -35,8 +31,7 @@ module.exports = function(config) {
         files: [
             angularPath,
             angularMockPath,
-            specs,
-            srcs
+            specs
         ],
 
 
@@ -44,27 +39,18 @@ module.exports = function(config) {
         exclude: [
         ],
 
-        
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: preprocessors,
         
-        webpack: webpackConfig,
+        webpack: getWebpackConfig(),
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'coverage'],
+        reporters: getReporters(),
 
-        coverageReporter: {
-            dir: 'dist/coverage/',
-            subdir: '.',
-            reporters: [
-                { type: 'lcov'},
-                { type: 'text-summary' } 
-            ]
-        },
+        coverageReporter: getCoverageReporterConfig(),
 
     // web server port
         port: 9876,
@@ -90,10 +76,46 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: singleRun,
 
     // Concurrency level
     // how many browser should be started simultaneous
         concurrency: Infinity
     });
 };
+
+function getReporters() {
+    var reporters = ['progress'];
+    if(coverage || ci) {
+        reporters.push('coverage');
+    }
+
+    return reporters;
+}
+
+function getCoverageReporterConfig() {
+    if(coverage || ci) {
+        return {
+            dir: 'dist/coverage/',
+            subdir: '.',
+            reporters: [
+                { type: 'lcov'},
+                { type: 'text-summary' } 
+            ]
+        };
+    }
+}
+
+function getWebpackConfig() {
+    var webpackConfig = require('./webpack.config');
+    if(coverage || ci) {
+        webpackConfig.entry = {};
+        webpackConfig.module = webpackConfig.module || {};
+        webpackConfig.module.postLoaders = webpackConfig.module.postLoaders || [];
+        webpackConfig.module.postLoaders.push(
+            { test: /\.js$/i, exclude: /spec|node_modules/, loader: 'istanbul-instrumenter'}
+        );
+    }
+    
+    return webpackConfig;
+}

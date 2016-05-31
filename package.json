@@ -11,6 +11,8 @@
   "scripts": {
     "postinstall": "bower install",
     "build": "webpack -p",
+    "test-cov": "(set NODE_MODE=cov|| NODE_MODE=cov) && karma start karma.conf.js",
+    "test-ci": "(set NODE_MODE=ci|| NODE_MODE=ci) && karma start karma.conf.js",
     "test": "karma start karma.conf.js"
   },
   "repository": {

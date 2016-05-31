@@ -67,7 +67,7 @@ describe('request', function() {
                 sessionID: sessionID
             }
         };
-        $httpBackend.whenPOST(/.*/)
+        $httpBackend.whenPOST()
         .respond(200, loginData);
         $httpBackend.whenGET()
         .respond(200);
