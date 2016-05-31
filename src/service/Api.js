@@ -52,5 +52,6 @@ require('./metadata')(Api);
 require('./namedQuery')(Api);
 require('./report')(Api);
 require('./remove')(Api);
+require('./getApiKey')(Api);
 
 module.exports = Api;

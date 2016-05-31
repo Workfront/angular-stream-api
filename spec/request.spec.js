@@ -85,4 +85,15 @@ describe('request', function() {
 
         $httpBackend.flush();
     });
+
+    it('should copy options.headers property to config.headers', function() {
+        var passedHeaders =  {someprop: 'somevalue'};
+        streamApi.options.headers = passedHeaders;
+        $httpBackend.whenPOST()
+        .respond(200, function(url, data, headers) {
+            expect(headers).toBe(passedHeaders);
+        });
+        streamApi.request('url', {}, {}, '', streamApi.Methods.POST);
+        $httpBackend.flush();
+    });
 });

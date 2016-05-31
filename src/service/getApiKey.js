@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = function(Api) {
-    Api.prototype.login = function(username, password) {
-        var params = {
+    Api.prototype.getApiKey = function(username, password) {
+        var actionArgs = {
             username: username,
             password: password
         };
-
-        return this.request('login', undefined, params, undefined, this.Methods.POST)
+        
+        return this.execute('user', undefined, 'getApiKey', actionArgs)
         .then(function(response) {
             if(response.data && response.data.data) {
                 this.options.headers = this.options.headers || {}; 
-                this.options.headers = {sessionID: response.data.data.sessionID};
+                this.options.headers = {apiKey: response.data.data.result};
                 return response.data;
             }
 
