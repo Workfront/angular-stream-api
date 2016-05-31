@@ -14,6 +14,10 @@ module.exports = function(config) {
         angularMockPath = path.resolve('bower_components', 'angular-mocks', 'angular-mocks.js'),
         preprocessors = {},
         singleRun = ci;
+        
+    if(ci) {
+        console.log('---------- running in CI mode -------------'); // eslint-disable-line no-console
+    }
 
     preprocessors[specs] = 'webpack';
 
