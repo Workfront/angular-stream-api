@@ -13,10 +13,7 @@ node_js:
     - "iojs"
 
 before_install:
-    - npm install -g bower
+    - npm install -g bower codecov
     
 script:
-    - npm run test-ci && cat ./dist/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./dist/coverage
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    - npm run test-ci && cat ./dist/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && codecov && rm -rf ./dist/coverage
