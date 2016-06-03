@@ -39,7 +39,7 @@ function Api(config) {
     this.options.url = parsedUrl.protocol + '//' + parsedUrl.host + path;
 }
 
-Api.prototype.Constants = require('workfront-api-constants');
+Api.prototype.Constants = require('workfront-api-constants/dist/umd/constants');
 Api.prototype.Methods = {
     GET: 'GET',
     PUT: 'PUT',

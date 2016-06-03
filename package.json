@@ -45,6 +45,6 @@
     "url-parse": "^1.1.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-    "workfront-api-constants": "^1.0.3"
+    "workfront-api-constants": "^1.0.4"
   }
 }

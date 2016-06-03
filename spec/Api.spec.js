@@ -88,6 +88,4 @@ describe('Api', function() {
         var api2 = streamApiService.getInstance({url: 'https://bar', version: '4.0'}, true);
         expect(api1).not.toBe(api2);
     });
-    
-    
 });
