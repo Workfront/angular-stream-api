@@ -32,11 +32,20 @@ function Api(config) {
     }
 
     this.options = {};
+    if(config.apiKey) {
+        this.options.headers = {apiKey: config.apiKey};
+    }
+    
     this.options.url = parsedUrl.protocol + '//' + parsedUrl.host + path;
 }
 
-Api.prototype.Constants = require('./ApiConstants');
-Api.prototype.Methods = require('./ApiMethods');
+Api.prototype.Constants = require('workfront-api-constants');
+Api.prototype.Methods = {
+    GET: 'GET',
+    PUT: 'PUT',
+    DELETE: 'DELETE',
+    POST: 'POST'
+};
 
 require('./request')(Api);
 require('./get')(Api);

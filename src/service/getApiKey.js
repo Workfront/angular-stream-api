@@ -11,7 +11,7 @@ module.exports = function(Api) {
         .then(function(response) {
             if(response.data && response.data.data) {
                 this.options.headers = this.options.headers || {}; 
-                this.options.headers = {apiKey: response.data.data.result};
+                this.options.headers['apiKey'] = response.data.data.result;
                 return response.data;
             }
 

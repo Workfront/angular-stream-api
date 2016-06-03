@@ -8,11 +8,11 @@ module.exports = function(Api) {
         var path = objCode + '/count';
         return this.request(path, undefined, query, undefined, this.Methods.GET)
         .then(function(response) {
-            if(response.data && response.data.count) {
+            if(response.data && typeof response.data.count === 'number') {
                 return response.data.count;
             }
 
-            return this.promise.reject({message: 'Error'});
+            return this.promise.reject({message: 'Server returned invalid data.'});
         }.bind(this));
     };
 };
