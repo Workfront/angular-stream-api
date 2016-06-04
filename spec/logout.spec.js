@@ -36,9 +36,11 @@ describe('logout', function() {
 
     it('should remove from headers', function(done) {
         var data = {
-            success: true
+            data: {
+                success: true
+            }
         };
-        $httpBackend.expectGET(/.*/)
+        $httpBackend.expectGET()
         .respond(200, data);
         var sessionID = '12345678';
         streamApi.options.headers = {sessionID: sessionID};
@@ -52,9 +54,7 @@ describe('logout', function() {
     });
 
     it('should not remove headers and should reject promise if request doesn\'t contain success: true', function(done) {
-        var data = {
-            success: false
-        };
+        var data = {};
         $httpBackend.expectGET()
         .respond(200, data);
         var sessionID = '12345678';
