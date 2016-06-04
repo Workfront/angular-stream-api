@@ -34,7 +34,7 @@ describe('logout', function() {
         $httpBackend.flush();
     });
 
-    it('should remove sessionID from headers', function(done) {
+    it('should remove from headers', function(done) {
         var data = {
             success: true
         };
@@ -44,18 +44,18 @@ describe('logout', function() {
         streamApi.options.headers = {sessionID: sessionID};
         streamApi.logout()
         .then(function() {
-            expect(streamApi.options.headers.sessionID).toBeUndefined();
+            expect(streamApi.options.headers).toBeUndefined();
             done();
         });
         
         $httpBackend.flush();
     });
 
-    it('should not remove sessionID  and should reject promise if request doesn\'t contain success: true', function(done) {
+    it('should not remove headers and should reject promise if request doesn\'t contain success: true', function(done) {
         var data = {
             success: false
         };
-        $httpBackend.expectGET(/.*/)
+        $httpBackend.expectGET()
         .respond(200, data);
         var sessionID = '12345678';
         streamApi.options.headers = {sessionID: sessionID};
@@ -70,7 +70,7 @@ describe('logout', function() {
 
     it('should not do anything', function(done) {
         
-        $httpBackend.expectGET(/.*/)
+        $httpBackend.expectGET()
         .respond(500);
         var sessionID = '12345678';
         streamApi.options.headers = {sessionID: sessionID};

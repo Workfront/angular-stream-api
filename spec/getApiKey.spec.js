@@ -40,10 +40,14 @@ describe('getApiKey', function() {
         $httpBackend.flush();
     });
 
-    it('should set maek call by correct url', function() {
-        var requestedUrl = 'https://foo/attask/api-internal/user?action=getApiKey&password=bar&username=foo';
+    it('should make call by correct urls when first call doesn\'t return valid apiKey' , function() {
+        var requestedUrl1 = 'https://foo/attask/api-internal/user?action=getApiKey&password=bar&username=foo';
+        var requestedUrl2 = 'https://foo/attask/api-internal/user?action=generateApiKey&password=bar&username=foo';
 
-        $httpBackend.expectPUT(requestedUrl)
+        $httpBackend.expectPUT(requestedUrl1)
+        .respond(200);
+
+        $httpBackend.expectPUT(requestedUrl2)
         .respond(200);
         
         streamApi.getApiKey('foo', 'bar');
@@ -59,7 +63,7 @@ describe('getApiKey', function() {
         .respond(200, response);
         streamApi.getApiKey('foo', 'bar')
         .then(function(result) {
-            expect(result).toEqual(response);
+            expect(result.data).toEqual(response);
             done();
         });
         

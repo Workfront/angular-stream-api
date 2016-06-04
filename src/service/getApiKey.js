@@ -9,13 +9,28 @@ module.exports = function(Api) {
         
         return this.execute('user', undefined, 'getApiKey', actionArgs)
         .then(function(response) {
-            if(response.data && response.data.data) {
-                this.options.headers = this.options.headers || {}; 
-                this.options.headers['apiKey'] = response.data.data.result;
-                return response.data;
+            var res = extractKey.call(this, response);
+            if(res) {
+                return res;
             }
 
-            return this.promise.reject();
+            return this.execute('user', undefined, 'generateApiKey', actionArgs);
+        }.bind(this))
+        .then(function(response) {
+            var res = extractKey.call(this, response);
+            if(res) {
+                return res;
+            }
+            
+            this.promise.reject();
         }.bind(this));
     };
+    
+    function extractKey(response) {
+        var data = response.data;
+        if(data && data.data && data.data.result) {
+            this.options.headers = { apiKey: data.data.result};
+            return response;
+        }
+    }
 };

@@ -5,7 +5,7 @@ module.exports = function(Api) {
         return this.request('logout', undefined, undefined, undefined, this.Methods.GET)
         .then(function(response) {
             if(response.data && response.data.success) {
-                delete this.options.headers.sessionID;
+                delete this.options.headers;
                 return this.promise.resolve();
             }
 
