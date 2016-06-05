@@ -36,6 +36,10 @@ function Api(config) {
         this.options.headers = {apiKey: config.apiKey};
     }
     
+    if(config.sessionId) {
+        this.options.headers = {sessionID: config.sessionId};
+    }
+    
     this.options.url = parsedUrl.protocol + '//' + parsedUrl.host + path;
 }
 

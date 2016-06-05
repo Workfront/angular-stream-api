@@ -88,4 +88,16 @@ describe('Api', function() {
         var api2 = streamApiService.getInstance({url: 'https://bar', version: '4.0'}, true);
         expect(api1).not.toBe(api2);
     });
+
+    it('should set option headers to sessionId when passed', function() {
+        var sessionId = '12345678',
+            api = streamApiService.getInstance({url: 'https://foo', version: '5.0', sessionId: sessionId});
+        expect(api.options.headers).not.toBe({sessionID: sessionId});
+    });
+
+    it('should set option headers to apiKey when passed', function() {
+        var apiKey = '12345678',
+            api = streamApiService.getInstance({url: 'https://foo', version: '5.0', apiKey: apiKey});
+        expect(api.options.headers).not.toBe({apiKey: apiKey});
+    });
 });
