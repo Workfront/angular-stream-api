@@ -1,6 +1,6 @@
 {
   "name": "angular-stream-api",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A Workfront Stream API for AngularJS",
   "license": "MIT",
   "author": "Workfront",
