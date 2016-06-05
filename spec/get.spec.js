@@ -21,7 +21,7 @@ describe('get', function() {
     
     var streamApi;
     beforeEach(function() {
-        streamApi = streamApiService.getInstance({url: 'https://foo'});
+        streamApi = streamApiService.getInstance({host: 'https://foo'});
     });
 
     it('should make call by correct url with array of object IDs', function() {

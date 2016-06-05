@@ -21,7 +21,7 @@ describe('getApiKey', function() {
     
     var streamApi;
     beforeEach(function() {
-        streamApi = streamApiService.getInstance({url: 'https://foo'});
+        streamApi = streamApiService.getInstance({host: 'https://foo'});
     });
 
     it('should set correct apiKey in config headers on successful login', function(done) {

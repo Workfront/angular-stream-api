@@ -10,6 +10,8 @@ function streamApiServiceProvider() {
 streamApiServiceFactory.$inject = ['$http', '$httpParamSerializer', '$q'];
 function streamApiServiceFactory($http, $httpParamSerializer, $q) {
     var Api = require('./service/Api'),
+        Url = require('url-parse'),
+        angular = require('angular'),
         factory = {},
         _instance;
         
@@ -17,16 +19,37 @@ function streamApiServiceFactory($http, $httpParamSerializer, $q) {
     Api.prototype.serializer = $httpParamSerializer;
     Api.prototype.promise = $q;
     
-    factory.getInstance = function(config, returnNewInstance) {
-        if(returnNewInstance) {
+    factory.getInstance = function(config, requestNewInstance) {
+        // In case when config is not provided and _instance is intialized - return it
+        if(!config && _instance) {
+            return _instance;
+        }
+        
+        if(!(config && angular.isObject(config))) {
+            throw new Error('Please provide valid configuration object.');
+        }
+
+        if(!(('host' in config) && (typeof config.host === 'string'))) {
+            throw new Error('\'config\' should have \'host\' property of type \'string\'');
+        }
+        
+        if(config.host.indexOf('http://') !== 0
+        && config.host.indexOf('https://') !== 0) {
+            throw new Error('You must provide valid scheme with \'host\'');
+        }
+        
+        var parsedUrl = new Url(config.host);
+        config.host = parsedUrl.protocol + '//' + parsedUrl.host;
+        
+        if(requestNewInstance) {
             return new Api(config);
         }
         
-        if(!_instance) {
-            _instance = new Api(config); 
+        if(_instance && isSameOriginAndVersion(config, _instance.config)) {
+            return _instance;
         }
 
-        return _instance;
+        return _instance = new Api(config);
     };
 
     factory.deleteInstance = function() {
@@ -34,6 +57,10 @@ function streamApiServiceFactory($http, $httpParamSerializer, $q) {
     };
     
     return factory;
+}
+
+function isSameOriginAndVersion(config1, config2) {
+    return config1.host === config2.host && config1.version === config2.version;
 }
 
 module.exports = function(ngModule) {

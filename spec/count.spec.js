@@ -21,7 +21,7 @@ describe('count', function() {
     
     var streamApi;
     beforeEach(function() {
-        streamApi = streamApiService.getInstance({url: 'https://foo'});
+        streamApi = streamApiService.getInstance({host: 'https://foo'});
     });
     
     it('should throw an exception when objCode doesn\'t orvided', function() {

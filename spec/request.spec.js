@@ -26,18 +26,18 @@ describe('request', function() {
     
     var streamApi;
     beforeEach(function() {
-        streamApi = streamApiService.getInstance({url:'http://foo'});
+        streamApi = streamApiService.getInstance({host:'http://foo'});
     });
 
-    it('should setup config correctly when passed task as path and method', function() {
+    it('should setup httpConfig correctly when passed task as path and method', function() {
         streamApi.request('task', null, null, null, streamApi.Methods.GET);
-        expect(streamApi.config.url).toBe('http://foo/attask/api-internal/task');
-        expect(streamApi.config.method).toBe(streamApi.Methods.GET);
+        expect(streamApi.httpConfig.url).toBe('http://foo/attask/api-internal/task');
+        expect(streamApi.httpConfig.method).toBe(streamApi.Methods.GET);
     });
 
     it('should set correct url when passed /task as path', function() {
         streamApi.request('task', null, null, null, streamApi.Methods.GET);
-        expect(streamApi.config.url).toBe('http://foo/attask/api-internal/task');
+        expect(streamApi.httpConfig.url).toBe('http://foo/attask/api-internal/task');
     });
 
     it('should throw when not passed data on method POST', function() {
@@ -50,17 +50,17 @@ describe('request', function() {
             .toThrow(new Error('You must specify method PUT or POST in case you have passed \'data\''));
     });
 
-    it('should set config.headers to Content-Type: application/json when method is POST', function() {
+    it('should set httpConfig.headers to Content-Type: application/json when method is POST', function() {
         streamApi.request('task', {}, null, null, streamApi.Methods.POST);
-        expect(streamApi.config.headers['Content-Type']).toBe('application/json;charset=utf-8');
+        expect(streamApi.httpConfig.headers['Content-Type']).toBe('application/json;charset=utf-8');
     });
 
-    it('should add to config.headers Content-Type: application/json when method is PUT', function() {
+    it('should add to httpConfig.headers Content-Type: application/json when method is PUT', function() {
         streamApi.request('task', {}, null, null, streamApi.Methods.PUT);
-        expect(streamApi.config.headers['Content-Type']).toBe('application/json;charset=utf-8');
+        expect(streamApi.httpConfig.headers['Content-Type']).toBe('application/json;charset=utf-8');
     });
 
-    it('should add to config.headers sessionID from \'data\' when logged in and will use it for subsequent calls', function(done) {
+    it('should add to httpConfig.headers sessionID from \'data\' when logged in and will use it for subsequent calls', function(done) {
         var sessionID = '12345678';
         var loginData = {
             data: {
@@ -77,16 +77,16 @@ describe('request', function() {
         .then(function(data) {
             expect(streamApi.options.headers.sessionID).toBe(data.data.sessionID);
             streamApi.request('task', undefined, undefined, undefined, streamApi.Methods.GET);
-            expect(streamApi.config.headers.sessionID).toBe(sessionID);
+            expect(streamApi.httpConfig.headers.sessionID).toBe(sessionID);
             streamApi.request('task', undefined, undefined, undefined, streamApi.Methods.GET);
-            expect(streamApi.config.headers.sessionID).toBe(sessionID);
+            expect(streamApi.httpConfig.headers.sessionID).toBe(sessionID);
             done();
         });
 
         $httpBackend.flush();
     });
 
-    it('should copy options.headers property to config.headers', function() {
+    it('should copy options.headers property to httpConfig.headers', function() {
         var passedHeaders =  {someprop: 'somevalue'};
         streamApi.options.headers = passedHeaders;
         $httpBackend.whenPOST()

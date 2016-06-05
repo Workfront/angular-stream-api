@@ -22,7 +22,7 @@ describe('report', function() {
     var streamApi,
         requestSpy;
     beforeEach(function() {
-        streamApi = streamApiService.getInstance({url: 'https://foo'});
+        streamApi = streamApiService.getInstance({host: 'https://foo'});
         requestSpy = spyOn(streamApi, 'request').and.callThrough();
     });
 

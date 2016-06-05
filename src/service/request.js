@@ -17,34 +17,34 @@ module.exports = function(Api) {
             fields = [fields];
         }
 
-        this.config = {};
-        this.config = angular.extend({}, this.options);
+        this.httpConfig = {};
+        this.httpConfig = angular.extend({}, this.options);
 
         var fullPath = path.indexOf('/') === 0 ? path : '/' + path;
-        this.config.url = this.config.url + fullPath;
+        this.httpConfig.url = this.httpConfig.url + fullPath;
 
         params = params || {};
         if(fields.length !== 0) {
             params.fields = fields.join();
         }
-        this.config.params = params;
-        this.config.method = method;
+        this.httpConfig.params = params;
+        this.httpConfig.method = method;
 
         if( method === this.Methods.GET
-        && (( this.config.url + '?'+ this.serializer(params)).length > 2000
+        && (( this.httpConfig.url + '?'+ this.serializer(params)).length > 2000
             || path === 'batch' )) {
-            this.config.method = this.Methods.POST;
+            this.httpConfig.method = this.Methods.POST;
             params.method = this.Methods.GET;
-            this.config.data = params;
-            this.config.params = undefined;
-            this.config.headers = this.config.headers || {};
-            this.config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+            this.httpConfig.data = params;
+            this.httpConfig.params = undefined;
+            this.httpConfig.headers = this.httpConfig.headers || {};
+            this.httpConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         } else if(data) {
-            this.config.data = data;
-            this.config.headers = this.config.headers || {};
-            this.config.headers['Content-Type'] = 'application/json;charset=utf-8';
+            this.httpConfig.data = data;
+            this.httpConfig.headers = this.httpConfig.headers || {};
+            this.httpConfig.headers['Content-Type'] = 'application/json;charset=utf-8';
         }
 
-        return this.http(this.config);
+        return this.http(this.httpConfig);
     };
 };
