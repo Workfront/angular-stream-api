@@ -1,7 +1,5 @@
 'use strict';
 
-var angular = require('angular');
-
 module.exports = function(Api) {
     Api.prototype.request = function(path, data, params, fields, method) {
         if(data && method !== this.Methods.POST && method !== this.Methods.PUT) {
@@ -18,7 +16,7 @@ module.exports = function(Api) {
         }
 
         this.httpConfig = {};
-        this.httpConfig = angular.extend({}, this.options);
+        this.httpConfig = JSON.parse(JSON.stringify(this.options));
 
         var fullPath = path.indexOf('/') === 0 ? path : '/' + path;
         this.httpConfig.url = this.httpConfig.url + fullPath;
@@ -30,18 +28,18 @@ module.exports = function(Api) {
         this.httpConfig.params = params;
         this.httpConfig.method = method;
 
+        this.httpConfig.headers = this.httpConfig.headers || {};
+
         if( method === this.Methods.GET
-        && (( this.httpConfig.url + '?'+ this.serializer(params)).length > 2000
-            || path === 'batch' )) {
+        && (( this.httpConfig.url + '?' + JSON.stringify(params)).length > 1500
+        || path === 'batch' )) {
             this.httpConfig.method = this.Methods.POST;
             params.method = this.Methods.GET;
-            this.httpConfig.data = params;
+            this.httpConfig.data = this.serializer(params);
             this.httpConfig.params = undefined;
-            this.httpConfig.headers = this.httpConfig.headers || {};
             this.httpConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         } else if(data) {
             this.httpConfig.data = data;
-            this.httpConfig.headers = this.httpConfig.headers || {};
             this.httpConfig.headers['Content-Type'] = 'application/json;charset=utf-8';
         }
 
