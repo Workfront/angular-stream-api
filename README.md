@@ -32,16 +32,19 @@ npm run dev
 
 Run following command to start server
 ```
-webpack-dev-server --host 127.0.0.1 --port 443 --content-base ./examples --devtool sourcemap --https --key o365.key --cert o365.crt  
+webpack-dev-server --host 127.0.0.1 --port 443 --content-base ./examples --devtool sourcemap --https --key self-signed.key --cert self-signed.crt  
 ```
+
 Add the following in your `hosts` file
 ```
 127.0.0.1 <any-subdomain>.attask-ondemand.com
 ```
+
 Open in browser following url
 ```
 https://<any-subdomain>.attask-ondemand.com/index.html  
 ```
+
 
 [travis-url]: https://travis-ci.org/Workfront/angular-stream-api
 [travis-image]: https://img.shields.io/travis/Workfront/angular-stream-api.svg?style=flat-square
