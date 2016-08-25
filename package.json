@@ -4,9 +4,6 @@
   "description": "A Workfront Stream API for AngularJS",
   "license": "MIT",
   "author": "Workfront",
-  "contributors": [
-    "Hamlet Hakobyan <hamlet.h.hakobyan@gmail.com>"
-  ],
   "main": "app.js",
   "scripts": {
     "postinstall": "bower install",
@@ -17,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HamletHakobyan/angular-stream-api.git"
+    "url": "git+https://github.com/Workfront/angular-stream-api.git"
   },
   "keywords": [
     "workfront",
@@ -27,25 +24,25 @@
     "angular"
   ],
   "bugs": {
-    "url": "https://github.com/HamletHakobyan/angular-stream-api/issues"
+    "url": "https://github.com/Workfront/workfront-api/issues"
   },
-  "homepage": "https://github.com/HamletHakobyan/angular-stream-api#readme",
+  "homepage": "https://github.com/Workfront/angular-stream-api",
   "devDependencies": {
-    "coveralls": "^2.11.9",
-    "cross-env": "^1.0.8",
-    "eslint": "^2.10.2",
-    "eslint-loader": "^1.3.0",
+    "coveralls": "^2.11.12",
+    "cross-env": "^2.0.0",
+    "eslint": "^3.3.1",
+    "eslint-loader": "^1.5.0",
     "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine": "^2.4.1",
-    "karma": "^0.13.22",
-    "karma-coverage": "^1.0.0",
+    "karma": "^1.2.0",
+    "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "karma-webpack": "^1.7.0",
-    "phantomjs-prebuilt": "^2.1.7",
-    "url-parse": "^1.1.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-webpack": "^1.8.0",
+    "phantomjs-prebuilt": "^2.1.12",
+    "url-parse": "^1.1.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
     "workfront-api-constants": "^1.0.4"
