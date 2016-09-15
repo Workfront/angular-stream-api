@@ -38,7 +38,7 @@ module.exports = function(Api) {
                 return res;
             }
             
-            this.promise.reject();
+            return this.promise.reject();
         }.bind(this));
     };
     

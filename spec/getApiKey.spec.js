@@ -111,4 +111,18 @@ describe('getApiKey', function() {
         
         expect(execute).toHaveBeenCalledWith('user', undefined, 'getApiKey', params);
     });
+
+    it('should called return rejected promise if no api key returned', function(done) {
+        $httpBackend.expectPUT()
+        .respond(200, {});
+        $httpBackend.expectPUT()
+        .respond(200, {});
+        streamApi.getApiKey('foo', 'bar')
+        .catch(function(result) {
+            expect(result).toBe(result);
+            done();
+        });
+        
+        $httpBackend.flush();
+    });
 });

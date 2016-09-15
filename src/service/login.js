@@ -26,7 +26,6 @@ module.exports = function(Api) {
         return this.request('login', undefined, params, undefined, this.Methods.POST)
         .then(function(response) {
             if(response.data && response.data.data) {
-                this.options.headers = this.options.headers || {}; 
                 this.options.headers = {sessionID: response.data.data.sessionID};
                 return response.data;
             }
