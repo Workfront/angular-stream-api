@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Workfront/angular-stream-api",
   "devDependencies": {
+    "bower": "1.8.0",
     "coveralls": "^2.11.12",
     "cross-env": "^2.0.0",
     "eslint": "^3.3.1",
@@ -45,6 +46,6 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
-    "workfront-api-constants": "^1.0.4"
+    "workfront-api-constants": "^2.0.0"
   }
 }
