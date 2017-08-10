@@ -31,14 +31,26 @@ function Api(config) {
     }
 
     this.options = {};
+
+    if(config.headers) {
+        this.options.headers = {};
+        for (var key in config.headers) {
+            if (config.headers.hasOwnProperty(key)) {
+                this.options.headers[key] = config.headers[key];
+            }
+        }
+    }
+
     if(config.apiKey) {
-        this.options.headers = {apiKey: config.apiKey};
+        this.options.headers = this.options.headers || {};
+        this.options.headers.apiKey = config.apiKey;
     }
-    
+
     if(config.sessionId) {
-        this.options.headers = {sessionID: config.sessionId};
+        this.options.headers = this.options.headers || {};
+        this.options.headers.sessionID = config.sessionId;
     }
-    
+
     this.options.url = config.host + path;
 }
 
