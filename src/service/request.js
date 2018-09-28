@@ -55,7 +55,7 @@ module.exports = function(Api) {
                 this.httpConfig.data = this.serializer(params);
                 this.httpConfig.params = undefined;
                 this.httpConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        } else if (method === this.Methods.PUT && (this.httpConfig.url + '?' + JSON.stringify(params)).length > 1500 && !data) {
+        } else if (method === this.Methods.PUT && (this.httpConfig.url + '?' + JSON.stringify(params)).length > 1500) {
                 this.httpConfig.method = this.Methods.POST;
                 params.method = this.Methods.PUT;
                 this.httpConfig.data = this.serializer(params);
