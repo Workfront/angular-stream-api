@@ -46,11 +46,10 @@ module.exports = function(Api) {
 
         this.httpConfig.headers = this.httpConfig.headers || {};
 
-        if( method === this.Methods.GET
-        && (( this.httpConfig.url + '?' + JSON.stringify(params)).length > 1500
+        if((( this.httpConfig.url + '?' + JSON.stringify(params)).length > 1500
         || path === 'batch' )) {
             this.httpConfig.method = this.Methods.POST;
-            params.method = this.Methods.GET;
+            params.method = (path === 'batch' ? this.Methods.GET : method);
             this.httpConfig.data = this.serializer(params);
             this.httpConfig.params = undefined;
             this.httpConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
