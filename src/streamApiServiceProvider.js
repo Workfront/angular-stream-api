@@ -55,7 +55,11 @@ function streamApiServiceFactory($http, $httpParamSerializer, $q) {
         }
         
         var parsedUrl = new Url(config.host);
-        config.host = parsedUrl.protocol + '//' + parsedUrl.host;
+        if (config.usePath) {
+            config.host = parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname;
+        } else {
+            config.host = parsedUrl.protocol + '//' + parsedUrl.host;            
+        }
         
         if(requestNewInstance) {
             return new Api(config);
